@@ -1,0 +1,49 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.5.RELEASE")
+    }
+}
+
+plugins {
+    id "net.ltgt.apt-idea" version "0.15"
+    id "java-library"
+}
+
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+idea {
+    module {
+        apt {
+            // the dependency scope used for apt and/or compileOnly dependencies (when enabled above)
+            mainDependenciesScope = "COMPILE"
+        }
+    }
+}
+
+group 'se.skatteverket.icc'
+version '1.0-SNAPSHOT'
+
+//bootJar {
+////    baseName = 'gs-messaging-jms'
+////    version =  '0.1.0'
+////}
+
+repositories {
+    mavenCentral()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+    annotationProcessor("org.projectlombok:lombok:1.16.18")
+    runtime("org.projectlombok:lombok:1.16.18")
+    implementation("org.projectlombok:lombok:1.16.18")
+    implementation("org.springframework.boot:spring-boot-starter-activemq")
+    implementation("org.apache.activemq:activemq-broker")
+    implementation("com.fasterxml.jackson.core:jackson-databind")
+}
